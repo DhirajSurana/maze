@@ -1,4 +1,4 @@
-package practice;
+package mazegenerator;
 
 
 import javax.swing.JComponent;

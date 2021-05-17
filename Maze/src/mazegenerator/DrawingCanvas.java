@@ -1,4 +1,4 @@
-package practice;
+package mazegenerator;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
