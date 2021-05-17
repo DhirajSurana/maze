@@ -48,7 +48,6 @@ public class DrawingCanvas extends JComponent {
 			next = getNeighbour(current);
 
 			if (next != null) {
-				// System.out.println(next.row + " " + next.col);
 				removeWall(current, next);
 				stack.push(current);
 				current = next;
