@@ -44,12 +44,10 @@ public class DrawingCanvas extends JComponent {
 		current = cell[0][0];
 		current.visited = true;
 		do {
-			// System.out.println("---------------------------------");
 			repaint();
 			next = getNeighbour(current);
 
 			if (next != null) {
-				// System.out.println(next.row + " " + next.col);
 				removeWall(current, next);
 				stack.push(current);
 				current = next;
@@ -101,7 +99,7 @@ public class DrawingCanvas extends JComponent {
 		if (curr.row < ROWS - 1 && cell[curr.row + 1][curr.col].visited == false) {
 			al.add(cell[curr.row + 1][curr.col]);
 		}
-		// left
+		// left neighbour
 		if (curr.col > 0 && cell[curr.row][curr.col - 1].visited == false) {
 			al.add(cell[curr.row][curr.col - 1]);
 		}
