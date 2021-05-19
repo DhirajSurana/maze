@@ -1,8 +1,8 @@
 package mazegenerator;
 
-
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class MyFrame extends JFrame {
@@ -19,5 +19,7 @@ public class MyFrame extends JFrame {
 		this.setBackground(Color.BLACK);
 		this.pack();
 		this.setLocationRelativeTo(null);
+		this.setIconImage(new ImageIcon(getClass().getResource("/maze.png")).getImage());
+		this.setTitle("Maze");
 	}
 }

@@ -12,9 +12,9 @@ import java.util.Stack;
 import javax.swing.JComponent;
 
 public class DrawingCanvas extends JComponent {
-	private static final int ROWS = 50;
-	private static final int COLS = 50;
-	private static final int SIZE = 15;
+	private static final int ROWS = 40;
+	private static final int COLS = 40;
+	private static final int SIZE = 10;
 	public static Cell[][] cell = new Cell[ROWS][COLS];
 	private static Stack<Cell> stack;
 	private Cell current;
