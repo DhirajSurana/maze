@@ -29,7 +29,6 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		addKeyListener(this);
 		ballsize = (SIZE - 4);
 		padding = (SIZE - ballsize) / 2;
-		System.out.println(padding);
 		this.setPreferredSize(new Dimension(COLS * SIZE + 2 * SIZE, ROWS * SIZE + 2 * SIZE));
 		generateGrid();
 
