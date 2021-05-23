@@ -6,16 +6,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class MyFrame extends JFrame {
-
-	private final int WIDTH = 660;
-	private final int HEIGHT = 660;
+	private DrawingCanvas canvas;
 
 	public MyFrame() {
+		canvas = new DrawingCanvas();
+		this.addKeyListener(canvas);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.add(new DrawingCanvas());
+		this.add(canvas);
 		this.setVisible(true);
-		this.setSize(WIDTH, HEIGHT);
 		this.setBackground(Color.BLACK);
 		this.pack();
 		this.setLocationRelativeTo(null);
