@@ -1,3 +1,3 @@
 # MAZE GAME
-find your way through the maze.
+Find your way through the maze.
 
