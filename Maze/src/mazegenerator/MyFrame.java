@@ -19,6 +19,6 @@ public class MyFrame extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setIconImage(new ImageIcon(getClass().getResource("/maze.png")).getImage());
-		this.setTitle("Maze");
+		this.setTitle("Maze Game  || 'N'-> NEW MAZE || 'R'-> RESTART");
 	}
 }

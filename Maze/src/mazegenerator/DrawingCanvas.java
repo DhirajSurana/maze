@@ -26,6 +26,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	private int i, j, padding, ballsize;
 
 	public DrawingCanvas() {
+		// thread = new Thread("maze_thread");
 		addKeyListener(this);
 		ballsize = (SIZE - 4);
 		padding = (SIZE - ballsize) / 2;
@@ -47,7 +48,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	private void dfs() {
 		stack = new Stack<>();
 		current = cell[0][0];
-		// current.leftwall = false;
+		current.leftwall = false;
 		cell[ROWS - 1][COLS - 1].rightwall = false;
 		current.visited = true;
 		do {
@@ -128,6 +129,8 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		paintgrid(g2d);
 		g2d.setColor(Color.yellow);
 		g2d.fillOval(player.x + padding, player.y + padding, ballsize, ballsize);
+		g2d.setColor(Color.red);
+		g2d.fillOval(cell[ROWS - 1][COLS - 1].x + padding, +cell[ROWS - 1][COLS - 1].y + padding, ballsize, ballsize);
 	}
 
 	private void paintgrid(Graphics2D g2d) {
@@ -154,6 +157,13 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		repaint();
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			player.x = SIZE;
+			player.y = SIZE;
+			player.row = 0;
+			player.col = 0;
+		}
 	}
 
 	@Override
@@ -170,12 +180,14 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 				player.y += SIZE;
 				player.row += 1;
 			}
+			checkExit();
 			break;
 		case (KeyEvent.VK_UP):
 			if (cell[player.row][player.col].topwall == false) {
 				player.y -= SIZE;
 				player.row -= 1;
 			}
+			checkExit();
 			break;
 		case (KeyEvent.VK_RIGHT):
 			if (player.row == ROWS - 1 && player.col == COLS - 1) {
@@ -185,6 +197,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 				player.x += SIZE;
 				player.col += 1;
 			}
+			checkExit();
 			break;
 		case (KeyEvent.VK_LEFT):
 			if (player.row == 0 && player.col == 0) {
@@ -194,10 +207,30 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 				player.x -= SIZE;
 				player.col -= 1;
 			}
+			checkExit();
 			break;
 
+		case (KeyEvent.VK_R):
+			player.x = SIZE;
+			player.y = SIZE;
+			player.row = 0;
+			player.col = 0;
+			break;
+		case (KeyEvent.VK_N):
+			generateGrid();
+			break;
 		default:
 			break;
+		}
+	}
+
+	private void checkExit() {
+		if ((player.row == ROWS - 1) && (player.col == COLS - 1)) {
+			generateGrid();
+			player.x = SIZE;
+			player.y = SIZE;
+			player.row = 0;
+			player.col = 0;
 		}
 	}
 
