@@ -15,6 +15,10 @@ import java.util.Stack;
 import javax.swing.JComponent;
 
 public class DrawingCanvas extends JComponent implements KeyListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected static final int ROWS = 20;
 	protected static final int COLS = 20;
 	protected static final int SIZE = 24;
