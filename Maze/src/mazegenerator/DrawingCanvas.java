@@ -29,7 +29,6 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	protected static final int COLS = 20;
 	protected static final int SIZE = 24;
 	public static Cell[][] cell = new Cell[ROWS][COLS];
-	private Cell next;
 	private Cell player;
 	private int i;
 	private int j;
@@ -72,7 +71,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		cell[ROWS - 1][COLS - 1].rightwall = false;
 		current.visited = true;
 		do {
-			next = getNeighbour(current);
+			Cell next = getNeighbour(current);
 
 			if (next != null) {
 				removeWall(current, next);
@@ -195,7 +194,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	}
 
 	/**
-	 * functions handling key events
+	 * function handling key event
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -208,9 +207,17 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		}
 	}
 
+	/**
+	 * function handling key event
+	 */
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}
+
+	/**
+	 * function handling key event
+	 */
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -218,14 +225,14 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		int key = e.getKeyCode();
 		switch (key) {
 		case (KeyEvent.VK_DOWN):
-			if (cell[player.row][player.col].bottomwall == false) {
+			if (!cell[player.row][player.col].bottomwall) {
 				player.y += SIZE;
 				player.row += 1;
 			}
 			checkExit();
 			break;
 		case (KeyEvent.VK_UP):
-			if (cell[player.row][player.col].topwall == false) {
+			if (!cell[player.row][player.col].topwall) {
 				player.y -= SIZE;
 				player.row -= 1;
 			}
@@ -235,7 +242,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 			if (player.row == ROWS - 1 && player.col == COLS - 1) {
 				break;
 			}
-			if (cell[player.row][player.col].rightwall == false) {
+			if (!cell[player.row][player.col].rightwall) {
 				player.x += SIZE;
 				player.col += 1;
 			}
@@ -245,7 +252,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 			if (player.row == 0 && player.col == 0) {
 				break;
 			}
-			if (cell[player.row][player.col].leftwall == false) {
+			if (!cell[player.row][player.col].leftwall) {
 				player.x -= SIZE;
 				player.col -= 1;
 			}
@@ -266,6 +273,9 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		}
 	}
 
+	/**
+	 * helper function to check if player reached the destination
+	 */
 	private void checkExit() {
 		if ((player.row == ROWS - 1) && (player.col == COLS - 1)) {
 			generateGrid();
