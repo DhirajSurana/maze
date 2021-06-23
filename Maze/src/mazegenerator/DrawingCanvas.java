@@ -210,7 +210,6 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	/**
 	 * function handling key event
 	 */
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}
@@ -218,7 +217,6 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	/**
 	 * function handling key event
 	 */
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 		repaint();
