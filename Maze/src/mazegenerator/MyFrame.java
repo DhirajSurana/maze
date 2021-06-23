@@ -5,10 +5,14 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+/**
+ * class to Structure JFrame
+ * 
+ * @author DHIRAJ
+ *
+ */
 public class MyFrame extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private DrawingCanvas canvas;
 

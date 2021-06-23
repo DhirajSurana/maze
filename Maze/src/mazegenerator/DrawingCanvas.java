@@ -14,31 +14,39 @@ import java.util.Stack;
 
 import javax.swing.JComponent;
 
+/**
+ * class in which the logic is implemented
+ * 
+ * @author DHIRAJ
+ *
+ */
 public class DrawingCanvas extends JComponent implements KeyListener {
 	/**
-	 * 
+	 * global variables
 	 */
 	private static final long serialVersionUID = 1L;
 	protected static final int ROWS = 20;
 	protected static final int COLS = 20;
 	protected static final int SIZE = 24;
 	public static Cell[][] cell = new Cell[ROWS][COLS];
-	private static Stack<Cell> stack;
 	private Cell current, next, player;
-	Random random;
-
+	private Random random;
 	private int i, j, padding, ballsize;
 
+	/**
+	 * Constructor to setup Maze generation
+	 */
 	public DrawingCanvas() {
-		// thread = new Thread("maze_thread");
 		addKeyListener(this);
 		ballsize = (SIZE - 4);
 		padding = (SIZE - ballsize) / 2;
 		this.setPreferredSize(new Dimension(COLS * SIZE + 2 * SIZE, ROWS * SIZE + 2 * SIZE));
 		generateGrid();
-
 	}
 
+	/**
+	 * helper function to instantiate the required no. of cells
+	 */
 	private void generateGrid() {
 		for (i = 0; i < ROWS; i++) {
 			for (j = 0; j < COLS; j++) {
@@ -46,11 +54,16 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 			}
 		}
 		dfs();
-
 	}
 
+	/**
+	 * performs Depth First Search (DFS) on the cells iteratively and backtracks if
+	 * no unvisited neighbor exists from the current cell
+	 */
 	private void dfs() {
-		stack = new Stack<>();
+		Stack<Cell> stack = new Stack<>();
+
+		// instantiate current cell at cell [0][0]
 		current = cell[0][0];
 		current.leftwall = false;
 		cell[ROWS - 1][COLS - 1].rightwall = false;
@@ -71,6 +84,12 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		player = new Cell(SIZE, SIZE, 0, 0, SIZE);
 	}
 
+	/**
+	 * removes walls between current cell and the next cell
+	 * 
+	 * @param current
+	 * @param next
+	 */
 	private void removeWall(Cell current, Cell next) {
 		// current is left of next
 		if (current.row == next.row && current.col == next.col - 1) {
@@ -95,22 +114,28 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		}
 	}
 
+	/**
+	 * helper function which returns a random neighbor of the current cell
+	 * 
+	 * @param curr the current cell
+	 * @return a random neighbor of the current cell
+	 */
 	private Cell getNeighbour(Cell curr) {
 		ArrayList<Cell> al = new ArrayList<>();
 		random = new Random();
-		// top neighbour
+		// top neighbor
 		if (curr.row > 0 && cell[curr.row - 1][curr.col].visited == false) {
 			al.add(cell[curr.row - 1][curr.col]);
 		}
-		// right neighbour
+		// right neighbor
 		if (curr.col < COLS - 1 && cell[curr.row][curr.col + 1].visited == false) {
 			al.add(cell[curr.row][curr.col + 1]);
 		}
-		// bottom neighbour
+		// bottom neighbor
 		if (curr.row < ROWS - 1 && cell[curr.row + 1][curr.col].visited == false) {
 			al.add(cell[curr.row + 1][curr.col]);
 		}
-		// left neighbour
+		// left neighbor
 		if (curr.col > 0 && cell[curr.row][curr.col - 1].visited == false) {
 			al.add(cell[curr.row][curr.col - 1]);
 		}
@@ -123,6 +148,9 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 
 	}
 
+	/**
+	 * function handling the graphics part
+	 */
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -137,8 +165,12 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		g2d.fillOval(cell[ROWS - 1][COLS - 1].x + padding, +cell[ROWS - 1][COLS - 1].y + padding, ballsize, ballsize);
 	}
 
+	/**
+	 * helper function to paint the maze
+	 * 
+	 * @param g2d graphics object
+	 */
 	private void paintgrid(Graphics2D g2d) {
-
 		g2d.setColor(Color.white);
 		g2d.setStroke(new BasicStroke(2));
 		for (i = 0; i < COLS; i++) {
@@ -159,6 +191,9 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		}
 	}
 
+	/**
+	 * functions handling key events
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 		repaint();

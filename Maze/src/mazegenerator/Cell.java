@@ -1,8 +1,13 @@
 package mazegenerator;
 
+/**
+ * Cell class for defining all the required properties
+ * 
+ * @author DHIRAJ
+ *
+ */
 public class Cell {
-	int row, col;
-	int x, y, size;
+	int row, col, x, y, size;
 	boolean topwall = true, rightwall = true, bottomwall = true, leftwall = true;
 	boolean visited = false;
 
