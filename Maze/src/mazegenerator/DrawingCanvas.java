@@ -29,9 +29,12 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	protected static final int COLS = 20;
 	protected static final int SIZE = 24;
 	public static Cell[][] cell = new Cell[ROWS][COLS];
-	private Cell current, next, player;
-	private Random random;
-	private int i, j, padding, ballsize;
+	private Cell next;
+	private Cell player;
+	private int i;
+	private int j;
+	private int padding;
+	private int ballsize;
 
 	/**
 	 * Constructor to setup Maze generation
@@ -64,7 +67,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 		Stack<Cell> stack = new Stack<>();
 
 		// instantiate current cell at cell [0][0]
-		current = cell[0][0];
+		Cell current = cell[0][0];
 		current.leftwall = false;
 		cell[ROWS - 1][COLS - 1].rightwall = false;
 		current.visited = true;
@@ -122,21 +125,21 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	 */
 	private Cell getNeighbour(Cell curr) {
 		ArrayList<Cell> al = new ArrayList<>();
-		random = new Random();
+		Random random = new Random();
 		// top neighbor
-		if (curr.row > 0 && cell[curr.row - 1][curr.col].visited == false) {
+		if (curr.row > 0 && !cell[curr.row - 1][curr.col].visited) {
 			al.add(cell[curr.row - 1][curr.col]);
 		}
 		// right neighbor
-		if (curr.col < COLS - 1 && cell[curr.row][curr.col + 1].visited == false) {
+		if (curr.col < COLS - 1 && !cell[curr.row][curr.col + 1].visited) {
 			al.add(cell[curr.row][curr.col + 1]);
 		}
 		// bottom neighbor
-		if (curr.row < ROWS - 1 && cell[curr.row + 1][curr.col].visited == false) {
+		if (curr.row < ROWS - 1 && !cell[curr.row + 1][curr.col].visited) {
 			al.add(cell[curr.row + 1][curr.col]);
 		}
 		// left neighbor
-		if (curr.col > 0 && cell[curr.row][curr.col - 1].visited == false) {
+		if (curr.col > 0 && !cell[curr.row][curr.col - 1].visited) {
 			al.add(cell[curr.row][curr.col - 1]);
 		}
 		if (al.size() > 0) {

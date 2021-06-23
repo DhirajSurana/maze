@@ -14,10 +14,9 @@ import javax.swing.JFrame;
 public class MyFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private DrawingCanvas canvas;
 
 	public MyFrame() {
-		canvas = new DrawingCanvas();
+		DrawingCanvas canvas = new DrawingCanvas();
 		this.addKeyListener(canvas);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);

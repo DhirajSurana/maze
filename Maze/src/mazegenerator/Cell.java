@@ -7,9 +7,16 @@ package mazegenerator;
  *
  */
 public class Cell {
-	int row, col, x, y, size;
-	boolean topwall = true, rightwall = true, bottomwall = true, leftwall = true;
-	boolean visited = false;
+	protected int row;
+	protected int col;
+	protected int x;
+	protected int y;
+	protected int size;
+	protected boolean topwall = true;
+	protected boolean rightwall = true;
+	protected boolean bottomwall = true;
+	protected boolean leftwall = true;
+	protected boolean visited = false;
 
 	public Cell(int i, int j, int row, int col, int size) {
 		x = i;
