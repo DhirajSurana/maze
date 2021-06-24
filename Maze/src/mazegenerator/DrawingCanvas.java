@@ -28,7 +28,7 @@ public class DrawingCanvas extends JComponent implements KeyListener {
 	protected static final int ROWS = 20;
 	protected static final int COLS = 20;
 	protected static final int SIZE = 24;
-	public static Cell[][] cell = new Cell[ROWS][COLS];
+	private final Cell[][] cell = new Cell[ROWS][COLS];
 	private Cell player;
 	private int i;
 	private int j;
